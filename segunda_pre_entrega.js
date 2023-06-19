@@ -141,6 +141,48 @@ function confirmarAccion() {
 
         function resumenContabilidad() {
 
+
+
+            let rango = listaRegistros.filter(
+                (i) => i.ventas >0 && i.ventas <= Infinity
+            );
+
+            
+
+            let contTotal= listaRegistros.map(
+                (i)=> `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+            )
+
+            let mensaje = contTotal.join("\n\n")
+
+            let reduceVentas=rango.reduce((acumulador,i)=>{
+                return acumulador+i.ventas
+            },0)
+
+            let reduceGanancias=rango.reduce((acumulador,i)=>{
+                return acumulador+i.ganancia
+            },0)
+
+            let reduceInteres=rango.reduce((acumulador,i)=>{
+                return acumulador+i.interes
+            },0)
+
+            let reduceSalidas=rango.reduce((acumulador,i)=>{
+                return acumulador+i.salidas
+            },0)
+           
+
+            let promedioInteres= reduceInteres/rango.length
+
+            let contabilidadTotal = `\n\nVentas: $${reduceVentas}, Interes: ${promedioInteres.toFixed(2)}% , Ganancias: $${reduceGanancias}, Salidas: $${reduceSalidas}`
+
+            alert(`${mensaje}${contabilidadTotal}`)
+            
+            
+
+
+
+        
         }
 
         function borrarRegistro() {
