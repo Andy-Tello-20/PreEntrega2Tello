@@ -4,15 +4,16 @@ function confirmarAccion() {
     if (respuesta) {
 
         class moldeRegistro {
-            constructor(id, ventas, interes, salidas) {
+            constructor(id, ventas, interes, salidas,ganancia) {
                 this.id = id
                 this.ventas = ventas,
-                    this.interes = interes,
-                    this.salidas = salidas
+                this.interes = interes,
+                this.salidas = salidas,
+                this.ganancia=ganancia
             }
 
             vistaPrevia() {
-                alert(`ID: ${this.id} - Las ventas son $${this.ventas}, con una ganancia de $${this.interes}, las salidas fueron: $${this.salidas}`)
+                alert(`ID: ${this.id} - Las ventas son $${this.ventas}, interes de ${this.interes}% ,una ganancia de $${this.ganancia}, las salidas fueron: $${this.salidas}`)
             }
         }
 
@@ -26,8 +27,9 @@ function confirmarAccion() {
             let ventas = parseInt(prompt("Ingrese una nueva venta:"))
             let interes = parseInt(prompt("Ingrese un % de interes"))
             let salidas = parseInt(prompt("Ingrese Salidas/Compras realizadas:"))
+            let ganancia= ventas*(interes/100)
 
-            let nuevoRegistro = new moldeRegistro(Id, ventas, interes, salidas)
+            let nuevoRegistro = new moldeRegistro(Id, ventas, interes, salidas,ganancia)
 
             listaRegistros.push(nuevoRegistro)
 
@@ -45,7 +47,7 @@ function confirmarAccion() {
                 )
 
                 if (buscador) {
-                    alert(`Id: ${buscador.id}, Ventas: $${buscador.ventas}, Interes: $${buscador.interes}, Salidas: $${buscador.salidas}`)
+                    alert(`Id: ${buscador.id}, Ventas: $${buscador.ventas}, Interes: $${buscador.interes}, Ganancia: $${buscador.ganancia}, Salidas: $${buscador.salidas}`)
 
                 } else {
                     alert("El registro no existe")
@@ -58,59 +60,77 @@ function confirmarAccion() {
         }
 
         function buscarPorVentas() {
-            
-            let minimo=parseInt(prompt("Ingrese un rango minimo de ventas: "))
-            let maximo=parseInt(prompt("Ingrese un rango Maximo de ventas: "))
 
-            
-                
-            while(true){
-                if(!listaRegistros.some((i) => i.ventas <= minimo)){
+            let minimo = parseInt(prompt("Ingrese un rango minimo de ventas: "))
+            let maximo = parseInt(prompt("Ingrese un rango Maximo de ventas: "))
 
-                    minimo=parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango minimo de ventas: "))
 
-                }else{
+
+            while (true) {
+                if (!listaRegistros.some((i) => i.ventas <= minimo)) {
+
+                    minimo = parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango minimo de ventas: "))
+
+                } else {
                     break
                 }
             }
-            while(true){
-                if(!listaRegistros.some((i) => i.ventas <= maximo)){
+            while (true) {
+                if (!listaRegistros.some((i) => i.ventas <= maximo)) {
 
-                    maximo=parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango Maximo de ventas: "))
+                    maximo = parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango Maximo de ventas: "))
 
-                }else{
+                } else {
                     break
                 }
             }
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas >= minimo && i.ventas <= maximo
-              );
+            );
+
+
+            // La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
+
+            let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
+
+            //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
+            let resultados = rango.map(
+                (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+            )
+
+            let mensaje = resultados.join("\n\n")
             
 
-            //Condicion: La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
-            if (rango.length > 0) {
 
-                let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
+            let reduceVentas=rango.reduce((acumulador,i)=>{
+                return acumulador+i.ventas
+            },0)
 
-                //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
-                let resultados = rango.map(
-                    (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Salidas: $${i.salidas}`
-                )
+            let reduceGanancias=rango.reduce((acumulador,i)=>{
+                return acumulador+i.ganancia
+            },0)
 
-                let mensaje = resultados.join("\n\n")
-                alert(`${cantidadEncontrada}${mensaje}`)
-            } else {
-                alert("No se encontraron registros en el rango especificado")
-            }
+            let reduceInteres=rango.reduce((acumulador,i)=>{
+                return acumulador+i.interes
+            },0)
 
+            let reduceSalidas=rango.reduce((acumulador,i)=>{
+                return acumulador+i.salidas
+            },0)
+
+            let promedioInteres= reduceInteres/rango.length
+
+            let contabilidadParcial = `\n\nVentas: $${reduceVentas}, Interes: ${promedioInteres.toFixed(2)}% , Ganancias: $${reduceGanancias}, Salidas: $${reduceSalidas}`
+            
+            alert(`${cantidadEncontrada}${mensaje}${contabilidadParcial}`)
 
         }
 
         function registroCompleto() {
 
             let iterarTodo = listaRegistros.map(
-                (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Salidas: $${i.salidas}`
+                (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
             )
 
             let verTodo = iterarTodo.join("\n\n")
