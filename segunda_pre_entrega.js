@@ -57,29 +57,54 @@ function confirmarAccion() {
 
         }
 
-        function BuscarPorVentas() {
-            let minimo = parseInt(prompt("Ingrese una venta minima:"))
-            let maximo = parseInt(prompt("Ingrese una venta Maxima:"))
+        function buscarPorVentas() {
+            
+            let minimo=parseInt(prompt("Ingrese un rango minimo de ventas: "))
+            let maximo=parseInt(prompt("Ingrese un rango Maximo de ventas: "))
+
+            
+                
+            while(true){
+                if(!listaRegistros.some((i) => i.ventas <= minimo)){
+
+                    minimo=parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango minimo de ventas: "))
+
+                }else{
+                    break
+                }
+            }
+            while(true){
+                if(!listaRegistros.some((i) => i.ventas <= maximo)){
+
+                    maximo=parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango Maximo de ventas: "))
+
+                }else{
+                    break
+                }
+            }
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas >= minimo && i.ventas <= maximo
-            )
+              );
+            
 
-            //Condicion: La longitud de la nueva lista "rango" segun los elementos encontrados por el metodo FILTER tienen que ser mayor a 0
+            //Condicion: La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
             if (rango.length > 0) {
 
                 let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
 
                 //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
                 let resultados = rango.map(
-                  (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Salidas: $${i.salidas}`
+                    (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Salidas: $${i.salidas}`
                 )
-            
+
                 let mensaje = resultados.join("\n\n")
                 alert(`${cantidadEncontrada}${mensaje}`)
-              } else {
+            } else {
                 alert("No se encontraron registros en el rango especificado")
-              }
+            }
+
+
         }
 
         function registroCompleto() {
@@ -91,6 +116,10 @@ function confirmarAccion() {
             let verTodo = iterarTodo.join("\n\n")
 
             alert(verTodo)
+
+        }
+
+        function resumenContabilidad() {
 
         }
 
@@ -146,10 +175,13 @@ function confirmarAccion() {
                         registroCompleto()
                         break
                     case 4:
-                        BuscarPorVentas()
+                        buscarPorVentas()
                         break
                     case 5:
                         borrarRegistro()
+                        break
+                    case 6:
+                        resumenContabilidad()
                         break
                     case 7:
                         console.log(`Gracias por utilizar nuestra app. Saludos!`)
