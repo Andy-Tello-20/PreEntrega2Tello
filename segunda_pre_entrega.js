@@ -13,7 +13,7 @@ function confirmarAccion() {
             }
 
             vistaPrevia() {
-                alert(`ID: ${this.id} - Las ventas son $${this.ventas}, interes de ${this.interes}% ,una ganancia de $${this.ganancia}, las salidas fueron: $${this.salidas}`)
+                alert(`ID: ${this.id} - Las ventas son $${this.ventas}, interes de ${this.interes}% ,una ganancia de $${this.ganancia.toFixed(2)}, las salidas fueron: $${this.salidas}`)
             }
         }
 
@@ -24,11 +24,31 @@ function confirmarAccion() {
         function registrar() {
             contador += 1
             let Id = contador
-            let ventas = parseInt(prompt("Ingrese una nueva venta:"))
-            let interes = parseInt(prompt("Ingrese un % de interes"))
-            let salidas = parseInt(prompt("Ingrese Salidas/Compras realizadas:"))
-            let ganancia= ventas*(interes/100)
+            let valor=true
+            
+            
 
+            
+            let ventas = parseInt(prompt("Ingrese una nueva venta:💲"))
+            let interes = parseInt(prompt("Ingrese un % de interes"))
+            let salidas = parseInt(prompt("Ingrese Salidas/Compras realizadas:💲"))
+            
+
+            while(valor){
+                if (isNaN(ventas)) {
+                    ventas = parseInt(prompt("El valor ingresado no es un numero,Ingrese una nueva venta:💲"))
+                } else if (isNaN(interes)) {
+                    interes = parseInt(prompt("El valor ingresado no es un numero,Ingrese un % de interes:"))
+                } else if (isNaN(salidas)) {
+                    salidas = parseInt(prompt("El valor ingresado no es un numero,Ingrese Salidas/Compras realizadas:💲"))
+                } else {
+                    valor = false
+                }
+
+            }
+
+            let ganancia= ventas*(interes/100)
+            
             let nuevoRegistro = new moldeRegistro(Id, ventas, interes, salidas,ganancia)
 
             listaRegistros.push(nuevoRegistro)
@@ -121,7 +141,7 @@ function confirmarAccion() {
 
             let promedioInteres= reduceInteres/rango.length
 
-            let contabilidadParcial = `\n\nVentas: $${reduceVentas}, Interes: ${promedioInteres.toFixed(2)}% , Ganancias: $${reduceGanancias}, Salidas: $${reduceSalidas}`
+            let contabilidadParcial = `\n\n🟡🟡Ventas-Parciales: 💲${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales: 💲${reduceGanancias}, Salidas-parciales: 💲${reduceSalidas}🟡🟡`
             
             alert(`${cantidadEncontrada}${mensaje}${contabilidadParcial}`)
 
@@ -174,7 +194,7 @@ function confirmarAccion() {
 
             let promedioInteres= reduceInteres/rango.length
 
-            let contabilidadTotal = `\n\nVentas: $${reduceVentas}, Interes: ${promedioInteres.toFixed(2)}% , Ganancias: $${reduceGanancias}, Salidas: $${reduceSalidas}`
+            let contabilidadTotal = `\n\n🟢🟡Ventas-parciales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales:💲 ${reduceGanancias.toFixed(2)}, Salidas-parciales:💲 ${reduceSalidas} 🟢🟡`
 
             alert(`${mensaje}${contabilidadTotal}`)
             
@@ -246,11 +266,11 @@ function confirmarAccion() {
                         resumenContabilidad()
                         break
                     case 7:
-                        console.log(`Gracias por utilizar nuestra app. Saludos!`)
+                        document.write(`Gracias por utilizar nuestro sistema de contabilidad 😊`)
                         menuExit = false
                         break
                     default:
-                        console.log("Opción no válida, ingrese alguna presente en el menu")
+                        alert("OPCION INVALIDA, INTENTE NUEVAMENTE ‼⚠ 🚩🚩")
                         break
                 }
             } while (menuExit)
