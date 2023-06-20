@@ -92,13 +92,16 @@ function confirmarAccion() {
                 (i) => i.ventas >= minimo && i.ventas <= maximo
             );
 
+            //copio el array rango con el nombre"copiaRango" y lo ordeno de menor a mayor segun el valor de las ventas 
+
+            let copiaRango = rango.slice().sort((a, b) => a.ventas - b.ventas)
 
             // La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
 
             let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
 
             //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
-            let resultados = rango.map(
+            let resultados = copiaRango.map(
                 (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
             )
 
@@ -269,20 +272,6 @@ function confirmarAccion() {
 
 
 confirmarAccion()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
