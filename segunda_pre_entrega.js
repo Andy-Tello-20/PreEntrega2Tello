@@ -86,24 +86,7 @@ function confirmarAccion() {
 
 
 
-            while (true) {
-                if (!listaRegistros.some((i) => i.ventas <= minimo)) {
-
-                    minimo = parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango minimo de ventas: "))
-
-                } else {
-                    break
-                }
-            }
-            while (true) {
-                if (!listaRegistros.some((i) => i.ventas <= maximo)) {
-
-                    maximo = parseInt(prompt("El valor no se encuentra en el registro. Ingrese un rango Maximo de ventas: "))
-
-                } else {
-                    break
-                }
-            }
+            
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas >= minimo && i.ventas <= maximo
@@ -194,7 +177,7 @@ function confirmarAccion() {
 
             let promedioInteres= reduceInteres/rango.length
 
-            let contabilidadTotal = `\n\n🟢🟡Ventas-parciales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales:💲 ${reduceGanancias.toFixed(2)}, Salidas-parciales:💲 ${reduceSalidas} 🟢🟡`
+            let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
 
             alert(`${mensaje}${contabilidadTotal}`)
             
@@ -215,7 +198,7 @@ function confirmarAccion() {
 
             function confirmar() {
 
-                let confirmarBorrado = confirm(`está seguro de borrar el registro Id: ${obtenerId.id}, Ventas: $${obtenerId.ventas}, Interes: $${obtenerId.interes}, Salidas: $${obtenerId.salidas} `)
+                let confirmarBorrado = confirm(`está seguro de borrar el registro Id: ${obtenerId.id}, Ventas: $${obtenerId.ventas}, Interes: $${obtenerId.interes}, Ganancias: $${obtenerId.ganancia}, Salidas: $${obtenerId.salidas} `)
 
                 if (confirmarBorrado) {
 
@@ -230,7 +213,7 @@ function confirmarAccion() {
                     alert(`El registro con ID: ${obtenerId.id}, ha sido eliminado`)
 
                 } else {
-
+                    alert("Operacion cancelada")
                 }
 
             }
@@ -279,7 +262,7 @@ function confirmarAccion() {
         menu()
 
     } else {
-        document.write("Accion cancelada")
+        document.write("Accion cancelada, vuelvas prontos 🙋🏻‍♂️")
     }
 
 }

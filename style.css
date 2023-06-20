@@ -1,0 +1,18 @@
+.contenedor{
+    width: 50vw;
+    height: 50vh;
+    background-color: #e8b160;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.contenedor h1{
+
+    color: #3a47b7;
+    font-size: 48px;
+    font-family: monospace;
+    font-weight: bold;
+    text-shadow: 3px 2px #00000045;
+}
