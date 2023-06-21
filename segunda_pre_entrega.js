@@ -214,7 +214,17 @@ function confirmarAccion() {
 
             let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
 
-            alert(`${contabilidadTotal}`)
+            let resumen
+
+            if(reduceGanancias == reduceSalidas){
+                resumen="Estás obteniendo un equilibrio entre los ingresos generados y los gastos incurridos en tu negocio"
+            }else if(reduceGanancias < reduceSalidas){
+                resumen="Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
+            }else{
+                resumen="Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
+            }
+
+            alert(`${contabilidadTotal}\n\n${resumen}`)
 
 
 
