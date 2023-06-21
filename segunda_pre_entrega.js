@@ -222,7 +222,9 @@ function confirmarAccion() {
                 } else if (reduceGanancias < reduceSalidas) {
                     resumen = "Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
                 } else {
-                    resumen = "Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
+                    let porcentajeRentabilidad=((reduceGanancias-reduceSalidas)/reduceSalidas)*100
+                    
+                    resumen = `Estás obteniendo un rendimiento positivo del ${porcentajeRentabilidad.toFixed(2)}% en tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable.`
                 }
 
                 alert(`${contabilidadTotal}\n\n${resumen}`)
