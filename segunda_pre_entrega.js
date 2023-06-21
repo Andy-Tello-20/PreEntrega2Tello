@@ -3,19 +3,30 @@ function confirmarAccion() {
 
     if (respuesta) {
 
+        function isNan(x) {
+            while (true) {
+                let solicitud = parseInt(prompt(x))
+                if (isNaN(solicitud)) {
+                    alert("No es un número, intente nuevamente")
+                } else {
+                    return solicitud
+                }
+            }
+        }
+
         class moldeRegistro {
             constructor(id, ventas, interes, salidas, ganancia, dia, mes, año, hora, minutos, segundos) {
                 this.id = id
                 this.ventas = ventas,
-                    this.interes = interes,
-                    this.salidas = salidas,
-                    this.ganancia = ganancia,
-                    this.dia = dia,
-                    this.mes = mes,
-                    this.año = año,
-                    this.hora = hora,
-                    this.minutos = minutos,
-                    this.segundos = segundos
+                this.interes = interes,
+                this.salidas = salidas,
+                this.ganancia = ganancia,
+                this.dia = dia,
+                this.mes = mes,
+                this.año = año,
+                this.hora = hora,
+                this.minutos = minutos,
+                this.segundos = segundos
             }
 
             vistaPrevia() {
@@ -33,22 +44,7 @@ function confirmarAccion() {
 
             contador += 1
             let Id = contador
-
-
-
             let ventas, interes, salidas
-
-            function isNan(x) {
-                while (true) {
-                    let solicitud = parseInt(prompt(x))
-                    if (isNaN(solicitud)) {
-                        alert("No es un número, intente nuevamente")
-                    } else {
-                        return solicitud
-                    }
-                }
-            }
-
             let pInt = "Ingrese un % de interés"
             let vent = "Ingrese una nueva venta"
             let Sali = "Ingrese Salidas/Compras"
@@ -78,20 +74,12 @@ function confirmarAccion() {
         function buscar() {
 
             let pedirId
+            let requestId = "Ingrese el ID del registro:"
+
 
             if (listaRegistros.length > 0) {
 
-                while (true) {
-
-                    pedirId = parseInt(prompt("Ingrese el ID del registro:"))
-
-                    if (isNaN(pedirId)) {
-                        alert("No es un numero, Intente nuevamente")
-                    } else {
-                        break
-                    }
-
-                }
+                pedirId = isNan(requestId)
 
                 let buscador = listaRegistros.find(
                     (i) => i.id === pedirId
@@ -113,11 +101,13 @@ function confirmarAccion() {
 
         function buscarPorVentas() {
 
-            let minimo = parseInt(prompt("Ingrese un rango minimo de ventas: "))
-            let maximo = parseInt(prompt("Ingrese un rango Maximo de ventas: "))
+            let minimo, maximo
 
+            let askminimo = "Ingrese un rango minimo de ventas:"
+            let askmaximo = "Ingrese un rango Maximo de ventas:"
 
-
+            minimo = isNan(askminimo)
+            maximo = isNan(askmaximo)
 
 
             let rango = listaRegistros.filter(
@@ -216,12 +206,12 @@ function confirmarAccion() {
 
             let resumen
 
-            if(reduceGanancias == reduceSalidas){
-                resumen="Estás obteniendo un equilibrio entre los ingresos generados y los gastos incurridos en tu negocio"
-            }else if(reduceGanancias < reduceSalidas){
-                resumen="Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
-            }else{
-                resumen="Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
+            if (reduceGanancias == reduceSalidas) {
+                resumen = "Estás obteniendo un equilibrio entre los ingresos generados y los gastos incurridos en tu negocio"
+            } else if (reduceGanancias < reduceSalidas) {
+                resumen = "Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
+            } else {
+                resumen = "Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
             }
 
             alert(`${contabilidadTotal}\n\n${resumen}`)
