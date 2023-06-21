@@ -12,7 +12,7 @@ function confirmarAccion() {
                     this.ganancia = ganancia,
                     this.dia = dia,
                     this.mes = mes,
-                    this.año=año,
+                    this.año = año,
                     this.hora = hora,
                     this.minutos = minutos,
                     this.segundos = segundos
@@ -74,16 +74,29 @@ function confirmarAccion() {
 
         function buscar() {
 
+            let pedirId
+
             if (listaRegistros.length > 0) {
 
-                let pedirId = parseInt(prompt("Ingrese el ID del registro:"))
+                while (true) {
+
+                    pedirId = parseInt(prompt("Ingrese el ID del registro:"))
+
+                    if (isNaN(pedirId)) {
+                        alert("No es un numero, Intente nuevamente")
+                    } else {
+                        break
+                    }
+
+                }
+
                 let buscador = listaRegistros.find(
                     (i) => i.id === pedirId
 
                 )
 
                 if (buscador) {
-                    alert(`Id: ${buscador.id}, Ventas: $${buscador.ventas}, Interes: $${buscador.interes}, Ganancia: $${buscador.ganancia}, Salidas: $${buscador.salidas}`)
+                    alert(`Id: ${buscador.id}, Ventas: $${buscador.ventas}, Interes: $${buscador.interes}, Ganancia: $${buscador.ganancia}, Salidas: $${buscador.salidas}\nFecha de ingreso ${buscador.dia}/${buscador.mes}/${buscador.año} -- ${buscador.hora}:${buscador.minutos}:${buscador.segundos}`)
 
                 } else {
                     alert("El registro no existe")
@@ -106,7 +119,7 @@ function confirmarAccion() {
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas >= minimo && i.ventas <= maximo
-            );
+            )
 
             //copio el array rango con el nombre"copiaRango" y lo ordeno de menor a mayor segun el valor de las ventas 
 
@@ -167,15 +180,15 @@ function confirmarAccion() {
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas > 0 && i.ventas <= Infinity
-            );
+            )
 
 
 
-            let contTotal = listaRegistros.map(
+            /*let contTotal = listaRegistros.map(
                 (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
             )
 
-            let mensaje = contTotal.join("\n\n")
+            let mensaje = contTotal.join("\n\n")*/
 
             let reduceVentas = rango.reduce((acumulador, i) => {
                 return acumulador + i.ventas
@@ -198,7 +211,7 @@ function confirmarAccion() {
 
             let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
 
-            alert(`${mensaje}${contabilidadTotal}`)
+            alert(`${contabilidadTotal}`)
 
 
 
