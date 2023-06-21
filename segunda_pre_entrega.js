@@ -4,12 +4,18 @@ function confirmarAccion() {
     if (respuesta) {
 
         class moldeRegistro {
-            constructor(id, ventas, interes, salidas,ganancia) {
+            constructor(id, ventas, interes, salidas, ganancia, dia, mes, año, hora, minutos, segundos) {
                 this.id = id
                 this.ventas = ventas,
-                this.interes = interes,
-                this.salidas = salidas,
-                this.ganancia=ganancia
+                    this.interes = interes,
+                    this.salidas = salidas,
+                    this.ganancia = ganancia,
+                    this.dia = dia,
+                    this.mes = mes,
+                    this.año=año,
+                    this.hora = hora,
+                    this.minutos = minutos,
+                    this.segundos = segundos
             }
 
             vistaPrevia() {
@@ -22,19 +28,20 @@ function confirmarAccion() {
 
 
         function registrar() {
+
             contador += 1
             let Id = contador
-            let valor=true
-            
-            
+            let valor = true
 
-            
+
+
+
             let ventas = parseInt(prompt("Ingrese una nueva venta:💲"))
             let interes = parseInt(prompt("Ingrese un % de interes"))
             let salidas = parseInt(prompt("Ingrese Salidas/Compras realizadas:💲"))
-            
 
-            while(valor){
+
+            while (valor) {
                 if (isNaN(ventas)) {
                     ventas = parseInt(prompt("El valor ingresado no es un numero,Ingrese una nueva venta:💲"))
                 } else if (isNaN(interes)) {
@@ -47,9 +54,18 @@ function confirmarAccion() {
 
             }
 
-            let ganancia= ventas*(interes/100)
-            
-            let nuevoRegistro = new moldeRegistro(Id, ventas, interes, salidas,ganancia)
+            const fechaActual = new Date()
+
+            let año = fechaActual.getFullYear()
+            let mes = fechaActual.getMonth() + 1
+            let dia = fechaActual.getDate()
+            let hora = fechaActual.getHours()
+            let minutos = fechaActual.getMinutes()
+            let segundos = fechaActual.getSeconds()
+
+            let ganancia = ventas * (interes / 100)
+
+            let nuevoRegistro = new moldeRegistro(Id, ventas, interes, salidas, ganancia, dia, mes, año, hora, minutos, segundos)
 
             listaRegistros.push(nuevoRegistro)
 
@@ -86,7 +102,7 @@ function confirmarAccion() {
 
 
 
-            
+
 
             let rango = listaRegistros.filter(
                 (i) => i.ventas >= minimo && i.ventas <= maximo
@@ -106,29 +122,29 @@ function confirmarAccion() {
             )
 
             let mensaje = resultados.join("\n\n")
-            
 
 
-            let reduceVentas=rango.reduce((acumulador,i)=>{
-                return acumulador+i.ventas
-            },0)
 
-            let reduceGanancias=rango.reduce((acumulador,i)=>{
-                return acumulador+i.ganancia
-            },0)
+            let reduceVentas = rango.reduce((acumulador, i) => {
+                return acumulador + i.ventas
+            }, 0)
 
-            let reduceInteres=rango.reduce((acumulador,i)=>{
-                return acumulador+i.interes
-            },0)
+            let reduceGanancias = rango.reduce((acumulador, i) => {
+                return acumulador + i.ganancia
+            }, 0)
 
-            let reduceSalidas=rango.reduce((acumulador,i)=>{
-                return acumulador+i.salidas
-            },0)
+            let reduceInteres = rango.reduce((acumulador, i) => {
+                return acumulador + i.interes
+            }, 0)
 
-            let promedioInteres= reduceInteres/rango.length
+            let reduceSalidas = rango.reduce((acumulador, i) => {
+                return acumulador + i.salidas
+            }, 0)
+
+            let promedioInteres = reduceInteres / rango.length
 
             let contabilidadParcial = `\n\n🟡🟡Ventas-Parciales: 💲${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales: 💲${reduceGanancias}, Salidas-parciales: 💲${reduceSalidas}🟡🟡`
-            
+
             alert(`${cantidadEncontrada}${mensaje}${contabilidadParcial}`)
 
         }
@@ -136,7 +152,7 @@ function confirmarAccion() {
         function registroCompleto() {
 
             let iterarTodo = listaRegistros.map(
-                (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+                (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}\nFecha de ingreso ${i.dia}/${i.mes}/${i.año} -- ${i.hora}:${i.minutos}:${i.segundos}`
             )
 
             let verTodo = iterarTodo.join("\n\n")
@@ -150,45 +166,45 @@ function confirmarAccion() {
 
 
             let rango = listaRegistros.filter(
-                (i) => i.ventas >0 && i.ventas <= Infinity
+                (i) => i.ventas > 0 && i.ventas <= Infinity
             );
 
-            
 
-            let contTotal= listaRegistros.map(
-                (i)=> `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+
+            let contTotal = listaRegistros.map(
+                (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
             )
 
             let mensaje = contTotal.join("\n\n")
 
-            let reduceVentas=rango.reduce((acumulador,i)=>{
-                return acumulador+i.ventas
-            },0)
+            let reduceVentas = rango.reduce((acumulador, i) => {
+                return acumulador + i.ventas
+            }, 0)
 
-            let reduceGanancias=rango.reduce((acumulador,i)=>{
-                return acumulador+i.ganancia
-            },0)
+            let reduceGanancias = rango.reduce((acumulador, i) => {
+                return acumulador + i.ganancia
+            }, 0)
 
-            let reduceInteres=rango.reduce((acumulador,i)=>{
-                return acumulador+i.interes
-            },0)
+            let reduceInteres = rango.reduce((acumulador, i) => {
+                return acumulador + i.interes
+            }, 0)
 
-            let reduceSalidas=rango.reduce((acumulador,i)=>{
-                return acumulador+i.salidas
-            },0)
-           
+            let reduceSalidas = rango.reduce((acumulador, i) => {
+                return acumulador + i.salidas
+            }, 0)
 
-            let promedioInteres= reduceInteres/rango.length
+
+            let promedioInteres = reduceInteres / rango.length
 
             let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
 
             alert(`${mensaje}${contabilidadTotal}`)
-            
-            
 
 
 
-        
+
+
+
         }
 
         function borrarRegistro() {
