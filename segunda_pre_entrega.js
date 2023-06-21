@@ -29,30 +29,33 @@ function confirmarAccion() {
 
         function registrar() {
 
+
+
             contador += 1
             let Id = contador
-            let valor = true
 
 
 
+            let ventas, interes, salidas
 
-            let ventas = parseInt(prompt("Ingrese una nueva venta:💲"))
-            let interes = parseInt(prompt("Ingrese un % de interes"))
-            let salidas = parseInt(prompt("Ingrese Salidas/Compras realizadas:💲"))
-
-
-            while (valor) {
-                if (isNaN(ventas)) {
-                    ventas = parseInt(prompt("El valor ingresado no es un numero,Ingrese una nueva venta:💲"))
-                } else if (isNaN(interes)) {
-                    interes = parseInt(prompt("El valor ingresado no es un numero,Ingrese un % de interes:"))
-                } else if (isNaN(salidas)) {
-                    salidas = parseInt(prompt("El valor ingresado no es un numero,Ingrese Salidas/Compras realizadas:💲"))
-                } else {
-                    valor = false
+            function isNan(x) {
+                while (true) {
+                    let solicitud = parseInt(prompt(x))
+                    if (isNaN(solicitud)) {
+                        alert("No es un número, intente nuevamente")
+                    } else {
+                        return solicitud
+                    }
                 }
-
             }
+
+            let pInt = "Ingrese un % de interés"
+            let vent = "Ingrese una nueva venta"
+            let Sali = "Ingrese Salidas/Compras"
+
+            ventas = isNan(vent)
+            interes = isNan(pInt)
+            salidas = isNan(Sali)
 
             const fechaActual = new Date()
 
