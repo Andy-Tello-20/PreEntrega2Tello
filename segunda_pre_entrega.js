@@ -18,15 +18,15 @@ function confirmarAccion() {
             constructor(id, ventas, interes, salidas, ganancia, dia, mes, año, hora, minutos, segundos) {
                 this.id = id
                 this.ventas = ventas,
-                this.interes = interes,
-                this.salidas = salidas,
-                this.ganancia = ganancia,
-                this.dia = dia,
-                this.mes = mes,
-                this.año = año,
-                this.hora = hora,
-                this.minutos = minutos,
-                this.segundos = segundos
+                    this.interes = interes,
+                    this.salidas = salidas,
+                    this.ganancia = ganancia,
+                    this.dia = dia,
+                    this.mes = mes,
+                    this.año = año,
+                    this.hora = hora,
+                    this.minutos = minutos,
+                    this.segundos = segundos
             }
 
             vistaPrevia() {
@@ -94,6 +94,7 @@ function confirmarAccion() {
                 }
 
             } else {
+                alert("El registro esta vacio")
 
             }
 
@@ -106,156 +107,181 @@ function confirmarAccion() {
             let askminimo = "Ingrese un rango minimo de ventas:"
             let askmaximo = "Ingrese un rango Maximo de ventas:"
 
-            minimo = isNan(askminimo)
-            maximo = isNan(askmaximo)
+            if (listaRegistros.length > 0) {
+
+                minimo = isNan(askminimo)
+                maximo = isNan(askmaximo)
 
 
-            let rango = listaRegistros.filter(
-                (i) => i.ventas >= minimo && i.ventas <= maximo
-            )
+                let rango = listaRegistros.filter(
+                    (i) => i.ventas >= minimo && i.ventas <= maximo
+                )
 
-            //copio el array rango con el nombre"copiaRango" y lo ordeno de menor a mayor segun el valor de las ventas 
+                //copio el array rango con el nombre"copiaRango" y lo ordeno de menor a mayor segun el valor de las ventas 
 
-            let copiaRango = rango.slice().sort((a, b) => a.ventas - b.ventas)
+                let copiaRango = rango.slice().sort((a, b) => a.ventas - b.ventas)
 
-            // La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
+                // La longitud de la nueva lista "rango" segun los elementos "ventas" encontrados por el metodo FILTER. Y esta tiene que ser mayor a 0
 
-            let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
+                let cantidadEncontrada = `Se encontraron ${rango.length} Registros\n\n`
 
-            //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
-            let resultados = copiaRango.map(
-                (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
-            )
+                //Se crea una nueva lista "resultado" y se la transforma concatenando texto + elementos de la misma lista
+                let resultados = copiaRango.map(
+                    (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+                )
 
-            let mensaje = resultados.join("\n\n")
+                let mensaje = resultados.join("\n\n")
 
 
 
-            let reduceVentas = rango.reduce((acumulador, i) => {
-                return acumulador + i.ventas
-            }, 0)
+                let reduceVentas = rango.reduce((acumulador, i) => {
+                    return acumulador + i.ventas
+                }, 0)
 
-            let reduceGanancias = rango.reduce((acumulador, i) => {
-                return acumulador + i.ganancia
-            }, 0)
+                let reduceGanancias = rango.reduce((acumulador, i) => {
+                    return acumulador + i.ganancia
+                }, 0)
 
-            let reduceInteres = rango.reduce((acumulador, i) => {
-                return acumulador + i.interes
-            }, 0)
+                let reduceInteres = rango.reduce((acumulador, i) => {
+                    return acumulador + i.interes
+                }, 0)
 
-            let reduceSalidas = rango.reduce((acumulador, i) => {
-                return acumulador + i.salidas
-            }, 0)
+                let reduceSalidas = rango.reduce((acumulador, i) => {
+                    return acumulador + i.salidas
+                }, 0)
 
-            let promedioInteres = reduceInteres / rango.length
+                let promedioInteres = reduceInteres / rango.length
 
-            let contabilidadParcial = `\n\n🟡🟡Ventas-Parciales: 💲${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales: 💲${reduceGanancias}, Salidas-parciales: 💲${reduceSalidas}🟡🟡`
+                let contabilidadParcial = `\n\n🟡🟡Ventas-Parciales: 💲${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-parciales: 💲${reduceGanancias}, Salidas-parciales: 💲${reduceSalidas}🟡🟡`
 
-            alert(`${cantidadEncontrada}${mensaje}${contabilidadParcial}`)
+                alert(`${cantidadEncontrada}${mensaje}${contabilidadParcial}`)
 
+            } else {
+                alert("El registro esta vacio")
+            }
         }
 
         function registroCompleto() {
 
-            let iterarTodo = listaRegistros.map(
-                (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}\nFecha de ingreso ${i.dia}/${i.mes}/${i.año} -- ${i.hora}:${i.minutos}:${i.segundos}`
-            )
+            if (listaRegistros.length > 0) {
 
-            let verTodo = iterarTodo.join("\n\n")
+                let iterarTodo = listaRegistros.map(
+                    (i) => `ID: ${i.id}, Ventas: $${i.ventas}, Interes: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}\nFecha de ingreso ${i.dia}/${i.mes}/${i.año} -- ${i.hora}:${i.minutos}:${i.segundos}`
+                )
 
-            alert(verTodo)
+                let verTodo = iterarTodo.join("\n\n")
 
+                alert(verTodo)
+
+            } else {
+                alert("El registro esta vacio")
+            }
         }
 
         function resumenContabilidad() {
 
+            if (listaRegistros.length > 0) {
+
+                let rango = listaRegistros.filter(
+                    (i) => i.ventas > 0 && i.ventas <= Infinity
+                )
 
 
-            let rango = listaRegistros.filter(
-                (i) => i.ventas > 0 && i.ventas <= Infinity
-            )
+
+                /*let contTotal = listaRegistros.map(
+                    (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
+                )
+    
+                let mensaje = contTotal.join("\n\n")*/
+
+                let reduceVentas = rango.reduce((acumulador, i) => {
+                    return acumulador + i.ventas
+                }, 0)
+
+                let reduceGanancias = rango.reduce((acumulador, i) => {
+                    return acumulador + i.ganancia
+                }, 0)
+
+                let reduceInteres = rango.reduce((acumulador, i) => {
+                    return acumulador + i.interes
+                }, 0)
+
+                let reduceSalidas = rango.reduce((acumulador, i) => {
+                    return acumulador + i.salidas
+                }, 0)
+
+
+                let promedioInteres = reduceInteres / rango.length
+
+                let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
+
+                let resumen
+
+                if (reduceGanancias == reduceSalidas) {
+                    resumen = "Estás obteniendo un equilibrio entre los ingresos generados y los gastos incurridos en tu negocio"
+                } else if (reduceGanancias < reduceSalidas) {
+                    resumen = "Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
+                } else {
+                    resumen = "Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
+                }
+
+                alert(`${contabilidadTotal}\n\n${resumen}`)
 
 
 
-            /*let contTotal = listaRegistros.map(
-                (i) => `Id: ${i.id}, Ventas: $${i.ventas}, Interés: $${i.interes}, Ganancia: $${i.ganancia}, Salidas: $${i.salidas}`
-            )
-
-            let mensaje = contTotal.join("\n\n")*/
-
-            let reduceVentas = rango.reduce((acumulador, i) => {
-                return acumulador + i.ventas
-            }, 0)
-
-            let reduceGanancias = rango.reduce((acumulador, i) => {
-                return acumulador + i.ganancia
-            }, 0)
-
-            let reduceInteres = rango.reduce((acumulador, i) => {
-                return acumulador + i.interes
-            }, 0)
-
-            let reduceSalidas = rango.reduce((acumulador, i) => {
-                return acumulador + i.salidas
-            }, 0)
 
 
-            let promedioInteres = reduceInteres / rango.length
 
-            let contabilidadTotal = `\n\n🟢🟡Ventas-Totales:💲 ${reduceVentas}, Promedio-Interes: ${promedioInteres.toFixed(2)}% , Ganancias-Totales:💲 ${reduceGanancias.toFixed(2)}, Salidas-Totales:💲 ${reduceSalidas} 🟢🟡`
-
-            let resumen
-
-            if (reduceGanancias == reduceSalidas) {
-                resumen = "Estás obteniendo un equilibrio entre los ingresos generados y los gastos incurridos en tu negocio"
-            } else if (reduceGanancias < reduceSalidas) {
-                resumen = "Estás incurriendo en pérdidas, tu negocio no está generando suficientes ingresos para cubrir los costos o gastos"
             } else {
-                resumen = "Estás obteniendo un rendimiento positivo de tu negocio, lo cual es deseable y demuestra que tu actividad comercial es rentable."
+                alert("El registro esta vacio")
             }
-
-            alert(`${contabilidadTotal}\n\n${resumen}`)
-
-
-
-
-
-
         }
 
         function borrarRegistro() {
-            let buscarPorId = parseInt(prompt("Ingrese el ID del registro:"))
 
-            //obtengo el objeto.ID
-            let obtenerId = listaRegistros.find(
-                (i) => i.id == buscarPorId
-            )
+            if (listaRegistros.length > 0) {
 
-            function confirmar() {
+                let buscarPorId = parseInt(prompt("Ingrese el ID del registro:"))
 
-                let confirmarBorrado = confirm(`está seguro de borrar el registro Id: ${obtenerId.id}, Ventas: $${obtenerId.ventas}, Interes: $${obtenerId.interes}, Ganancias: $${obtenerId.ganancia}, Salidas: $${obtenerId.salidas} `)
+                //obtengo el objeto.ID
+                let obtenerId = listaRegistros.find(
+                    (i) => i.id == buscarPorId
+                )
 
-                if (confirmarBorrado) {
+                if (obtenerId) {
+                    function confirmar() {
 
-                    //Busco indice en la listaRegistros a traves del ID
+                        let confirmarBorrado = confirm(`está seguro de borrar el registro Id: ${obtenerId.id}, Ventas: $${obtenerId.ventas}, Interes: $${obtenerId.interes}, Ganancias: $${obtenerId.ganancia}, Salidas: $${obtenerId.salidas} `)
 
-                    let indice = listaRegistros.indexOf(obtenerId)
+                        if (confirmarBorrado) {
 
-                    //Borro segun indice 
+                            //Busco indice en la listaRegistros a traves del ID
 
-                    listaRegistros.splice(indice, 1)
+                            let indice = listaRegistros.indexOf(obtenerId)
 
-                    alert(`El registro con ID: ${obtenerId.id}, ha sido eliminado`)
+                            //Borro segun indice 
+
+                            listaRegistros.splice(indice, 1)
+
+                            alert(`El registro con ID: ${obtenerId.id}, ha sido eliminado`)
+
+                        } else {
+                            alert("Operacion cancelada")
+                        }
+
+                    }
+                    confirmar()
 
                 } else {
-                    alert("Operacion cancelada")
+                    alert("El ID ingresado no existe")
                 }
 
+
+
+
+            } else {
+                alert("El registro esta vacio")
             }
-
-            confirmar()
-
-
         }
 
         function menu() {
